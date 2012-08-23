@@ -1,1 +1,81 @@
-MyM/README
+==================
+MyM - avant CMS 
+==================
+
+  Author: <Giovanni Sileno> giovanni@mexpro.it
+          http://mexpro.it
+
+  This program is free software published under the
+  terms of the GNU Lesser General Public License.
+
+  For the entire license text please refer to
+  http://www.gnu.org/licenses/lgpl.html
+  
+  -------------
+  
+  This is a CMS I keep developing in the spare time (since 2005!).  
+  It is still alpha, and have not been used for rigorous productions. 
+  Maybe I haven't had so much spare time, finally :)
+
+------------------
+Features:
+------------------
+
+  * very fast prototyping:    
+    1. starting from data models (here called STRUCTURES)
+      -> automatic creation of the tables in the database 
+      -> automatic logic for controllers
+      -> automatic views for input / outputs       
+    2. STRUCTURES can be then extended/customized using MODULES,
+      i.e. overloading controller/view automatic 
+          
+  * plain text or MySQL databases 
+  
+  * chronological management of content
+  * multilingual management of content
+  * automatic language recognition
+  
+  * light-weighted and generic admin control panel
+    
+  * user management, authentication
+  * privilege level management
+    - Read / Write / Delete, Own / All 
+    - to a given data model, 
+    - to a single field of the data model,
+  * captcha test when not logged
+
+  * could be used as MVC-oriented, but it not strict at all
+
+  * bbcode-like text content
+  * upload / resize image functions
+  * chaching functions  
+  
+  * light-weighted javascript error check for forms
+  
+  -------------------------------------------------------
+  Integrated dependencies (not covered by this licence):
+  ------------------------------------------------------
+ 
+  * calendar for dates: jscalendar (lgpl) 
+    http://www.dynarch.com/mishoo/calendar.epl
+  
+  * player for audio files: dewplayer (CC) 
+    http://www.alsacreations.fr/dewplayer.html
+  
+  * Averia-Bold true type font (OFL) for captchas..
+    http://openfontlibrary.org/font/averia/
+  
+  * language detection script (lgpl)
+    http://techpatterns.com/downloads/php_language_detection.php
+    
+-------
+Notes:
+-------
+
+  "avant", because I consider it "before" a CMS. 
+  It shares the same ideas behind other frameworks, but it is littler, 
+  and does not need MySQL. Just copy your site/application on your 
+  hosting directory!
+  
+  it is thought for light-weighted, very customized applications 
+  that need an internet base point.

@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd' />
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='en' lang='en'>
+<head>
+<meta http-equiv='content-type' content='text/html; charset=utf-8' />
+<title>MyM pagina di test</title>
+<link href='./test.css' rel='Stylesheet' type='text/css' /></head>
+<body>
+<h1>MyM</h1>
+<p>:: avant CMS ::<br/><br/>
+sviluppato da <strong>giovanni sileno</strong><br/>giovanni |at| mexpro |dot| it</p>
+<p>Se vuoi, puoi accedere al <a href='admin'>pannello di controllo</a>. [login: <em>admin</em> / password: <em>admin</em>] </p>
+<table><tr><td class='left'>URI del sito</td><td class='right'>http://localhost/test/empty</td></tr>
+<tr><td class='left'>email dell'admin</td><td class='right'>moi@mym.org</td></tr>
+<tr><td class='left'>Versione MyM</td><td class='right'>0.6.0</td></tr>
+<tr><td class='left'>path assoluto di MyM</td><td class='right'>/var/www/test/MyM</td></tr>
+<tr><td class='left'>path relativo di MyM</td><td class='right'>../../MyM</td></tr>
+<tr><td class='left'>path delle strutture</td><td class='right'>/var/www/test/examples/empty/app/structures/sources</td></tr>
+<tr><td class='left'>path dei moduli</td><td class='right'>/var/www/test/examples/empty/app/structures/modules</td></tr>
+<tr><td class='left'>database degli utenti</td><td class='right'>user</td></tr>
+<tr><td class='left'>priv per utenti non loggati</td><td class='right'>0</td></tr>
+<tr><td class='left'>priv per nuovi utenti</td><td class='right'>1</td></tr>
+<tr><td class='left'>priv per admin</td><td class='right'>15</td></tr>
+<tr><td class='left'>cache</td><td class='right'>attivata</td></tr>
+<tr><td class='left'>la cache scade in (sec)</td><td class='right'>2</td></tr>
+<tr><td class='left'>path della cache</td><td class='right'>/var/www/test/examples/empty/cache</td></tr>
+<tr><td class='left'>la sessione scade in (min)</td><td class='right'>30</td></tr>
+<tr><td class='left'>strutture</td><td class='right'>article user </td></tr>
+<tr><td class='left'>MySQL</td><td class='right'>non attivata</td></tr>
+<tr><td class='left'>path dei txtDB</td><td class='right'>/var/www/test/examples/empty/data/txtdb</td></tr>
+<tr><td class='left'>path degli upload</td><td class='right'>/var/www/test/examples/empty/data/upload</td></tr>
+<tr><td class='left'>multilingua</td><td class='right'>attivata</td></tr>
+<tr><td class='left'>path delle lingue</td><td class='right'>/var/www/test/examples/empty/app/lng</td></tr>
+<tr><td class='left'>lingue</td><td class='right'>  <a href='index.php?lng=en'><img src='../../MyM/img/ext_en.png' alt='English' /></a>  <a href='index.php?lng=it' class='current'><img src='../../MyM/img/ext_it.png' alt='Italiano' /></a></td></tr>
+</table></body>
+</html>

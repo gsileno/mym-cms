@@ -1,0 +1,41 @@
+* {margin: 0; padding: 0}
+
+html {
+  background-color: #333;
+}
+
+body {
+  width: 70%;
+  margin: 20px auto;
+  background-color: #eeeadc;
+  padding: 20px;
+  font-family: Verdana, sans-serif;
+  font-size: 11px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+table {
+  font-size: 10px;
+}
+
+tr {
+    height: 15px;
+}
+
+td {
+    padding: 3px;
+}
+
+td.left {
+    text-align: right;
+    width: 180px;
+    background-color: white;
+}
+
+a {
+  color: #ee5522;
+  font-weight: bold;
+}

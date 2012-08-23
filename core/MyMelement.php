@@ -1112,7 +1112,7 @@ class MyMelement
                break;
                
              case _NOW :
-               $array[$key] = mktime();
+               $array[$key] = time();
                break;               
                   
              default :

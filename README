@@ -12,21 +12,20 @@ http://www.gnu.org/licenses/lgpl.html
 
 -------------
 
-This is a CMS I keep developing in the spare time (since 2005!).  
-It is still alpha, and it has not been used for rigorous productions. 
-Perhaps I haven't had so much spare time, finally :)
+I keep developing this in the spare time, since 2005!  
+It is still alpha, perhaps I haven't had so much spare time, finally :)
 
 ------------------
 Features:
 ------------------
 
 * very fast prototyping:    
-1. starting from data models (here called STRUCTURES)
-   -> automatic creation of the tables in the database 
-   -> automatic logic for controllers
-   -> automatic views for input / outputs       
-2. STRUCTURES can be then extended/customized using MODULES,
-   for example overloading the controller/view functions  
+  1. starting from data models (here called STRUCTURES)
+     -> automatic creation of the tables in the database 
+     -> automatic logic for controllers
+     -> automatic views for input / outputs       
+  2. STRUCTURES can be then extended/customized using MODULES,
+     for example overloading the controller/view functions  
 
 * plain text or MySQL databases 
 
@@ -43,10 +42,11 @@ Features:
   - to a single field of the data model,
 * captcha test when not logged
 
-* could be used as MVC-oriented, but it not strict at all
+* object-oriented approach, but with some attention could be used as MVC
 
 * bbcode-like text content
-* upload / resize image functions
+* upload management
+* resize image functions
 * chaching functions  
 
 * light-weighted javascript error check for forms
@@ -71,10 +71,10 @@ Integrated dependencies (not covered by this licence):
 Notes:
 -------
 
-"avant", because I consider it "before" a CMS. 
-It shares the same ideas behind other frameworks, but it is littler, 
-and does not need MySQL. Just copy your site/application on your 
-hosting directory!
+MyM is an "avant" CMS, because I consider it "before" a CMS. 
+It follows ideas similar to other frameworks, but it is littler, 
+and does not need necessarly MySQL. Just copy your site/application 
+directory on your server!
 
 it is thought for light-weighted, very customized applications 
 that need an internet base point.

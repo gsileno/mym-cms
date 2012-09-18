@@ -49,6 +49,49 @@ function br2newline($string, $newline = "\n") {
 
 }
 
+function list2HTML($text) {
+
+  // list of items
+
+  // find all the lists of items
+  $nlist = preg_match_all( '/\[list\](.+?)\[\/list\]/sm', $text, $matches);  
+  
+  // for every list of items, create the items
+   if ($nlist > 0) for ($i=0; $i < $nlist; $i++) {
+       
+    // this is the external part
+    $original_code = $matches[0][$i];
+    
+    // change the <br> in newlines of the internal part
+    $listcode =  br2newline($matches[1][$i]);
+    
+    // separate items with newlines
+    ### TO DO: add end of string, as terminal character for an item
+    $nitems = preg_match_all('/(.+?)[(\r?\n)]/sm', $listcode, $itemmatches);
+
+    $code = "";
+    
+    if ($nitems > 0) {
+      
+      // add each item that is not empty the HTML item
+      $itemlist =  $itemmatches[1];
+      foreach ($itemlist as $item) {
+	if (trim($item) != "") {
+	  $item = remove_spaces($item);
+	  $code .= "<li>$item</li>";
+	}
+      }
+
+      // replace the original code
+      if ($code != "")
+        $text = str_replace($original_code, "<ul>\n".$code."</ul>\n", $text);
+    }
+    
+  }
+  
+  return $text;
+}
+
 function MySQLprotection($string) {
   $pattern[] = "/'/i";
   $replace[] = "\'"; 
@@ -220,32 +263,39 @@ function MyMcode2HTML($text, $tag = false, $emoticon = false) {
   trace(MYM_PROCESS_TRACE + 1, " MyMcode2HTML > text: ", $text);
   
   $imgpath = MYM_RELATIVE_PATH."/ext/tango/16x16";
-  
+
+  // class divs and capoverso
+    
   $suche = array('/\[class=\'(.+?)\'\](.+?)\[\/class\]/i',
                  '/\[class="(.+?)"\](.+?)\[\/class\]/i',
                  '/\[class=(.+?)\](.+?)\[\/class\]/i', 
                  '/\[c\/\]/i',
-                 '/\[c\]/i'                 
+                 '/\[c\]/i'
                  );  
   
   if ($tag) {  
-    $code = array('<span class="$1" > (div class $1) $2 (end div)</span>',         
-                  '<span class="$1" > (div class $1) $2 (end div)</span>',         
-                  '<span class="$1" > (div class $1) $2 (end div)</span>',  
+    $code = array('<span class="$1"> (div class $1) $2 (end div)</span>',         
+                  '<span class="$1"> (div class $1) $2 (end div)</span>',         
+                  '<span class="$1"> (div class $1) $2 (end div)</span>',  
                   '&para;',
-                  '&para;'
+                  '&para;',
+                  '<span class="classlist"> (list) $1 (end list)</span>'
                  );                                                        
   } else {
-    $code = array('<span class="$1" > $2 </span>',         
-                  '<span class="$1" > $2 </span>',          
-                  '<span class="$1" > $2 </span>',    
+    $code = array('<span class="$1"> $2 </span>',         
+                  '<span class="$1"> $2 </span>',          
+                  '<span class="$1"> $2 </span>',    
                   '',
-                  ''
+                  '',
+                  '<span class="classlist"> $2 </span>'
                  );   
   }
   $text = preg_replace($suche, $code, $text);  
+
+  $text = list2HTML($text);
   
-  
+  // emoticons
+
   if ($emoticon) {
     $suche = array('/\:\)/i',
                  '/\;\)/i',
@@ -262,7 +312,7 @@ function MyMcode2HTML($text, $tag = false, $emoticon = false) {
                 );
         
     $text = preg_replace($suche, $code, $text);
-  }
+  }          
     
   $text = bbcode2HTML($text);  
   
@@ -438,8 +488,8 @@ function MyMprocess($string, $makelink = "makelink") {
 
   trace(MYM_PROCESS_TRACE + 3, " MyMprocess > string: ", $string);
 
-  $string = bbcode2HTML($string);
-
+  $string = MyMcode2HTML($string);
+  
   // Changing for processes without links
   $pattern = "/###(.*)###/U";
   $matches = preg_match_all($pattern, $string, $out);

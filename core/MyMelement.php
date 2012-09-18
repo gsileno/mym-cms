@@ -723,8 +723,7 @@ class MyMelement
          else if ($pos = strpos($order, 'asc')) {
            $asc = true;
            $order = trim(substr($order, 0, $pos));
-         }
-         
+         }         
          $listid = $dbtable->order($order, $asc, $listid);
        }
 

@@ -107,7 +107,8 @@ function upload($filedata, $path = MYM_UPLOAD_REALPATH, $limit_size = true, $siz
 
   $endresult = "";
 
-  $ext = ".".end(explode('.', $filename)); 
+  $filenameparts = explode('.', $filename);
+  $ext = ".".end($filenameparts); 
   $justname = strstr($filename, $ext, true);
   
   if (is_file($path."/".$filename) && !OVERWRITE) {
@@ -162,7 +163,8 @@ function resizeImage($filename, $path = MYM_UPLOAD_REALPATH, $max_width = UNDEFI
   if ($squaredthumb == UNDEFINED)
     $squaredthumb = true;
 
-  $ext = ".".end(explode('.', $filename));  
+  $filenameparts = explode('.', $filename);
+  $ext = ".".end($filenameparts);   
     
   if (strtolower($ext) == '.jpg' || strtolower($ext) == '.jpeg')
     $newext = '.jpg';

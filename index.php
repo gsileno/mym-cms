@@ -673,6 +673,12 @@ class MyMadmin {
         break;
 
       case 'home':
+      
+        if (file_exists("./custom.php")) { // in the admin directory of the app
+          include_once("./custom.php");
+		  print("<hr/>");
+		}      
+		      
         print("<h2>Structures allowed</h2>");
         $structures = $this->structures;    
         $plugins = $this->plugins;
@@ -740,10 +746,6 @@ function loginMenu($o, $a, $structures) {
       print("<img src='".MYM_RELATIVE_PATH."/img/ext_fr.png' alt='Fran�ais' />");break;
   }
   print("  </li>\n");    
-  
-  // print("  <li><a ");
-  // if ($a == "home") print("class='active' ");  
-  // print("href='index.php?a=home'>Admin</a></li>\n");
   
   // if there is user management
   if (defined("MYM_USER_DB")) {
@@ -884,7 +886,7 @@ $structures = $mymadmin->structures;
 </div>
 
 <div id="header">
-  <h1>Control Panel</h1>
+  <h1><a href="index.php">MyM Control Panel</a></h1>
 </div>
 <div id='credits'>
 <p>powered by - <strong>MyM</strong> - revision: <?php print(MYM_VERSION); ?></p>
@@ -927,6 +929,8 @@ $structures = $mymadmin->structures;
       print("<span class='typed'>+italic+</span> &raquo; <em>italic</em><br/>");
       print("<span class='typed'>[i]italic[/i]</span> &raquo; <em>italic</em><br/>");
       print("<span class='typed'>[h]title[/h]</span> &raquo; <strong>title</strong><br/>");
+      print("<div id='line'>&nbsp;</div>\n");
+      print("<span class='typed'>[list]<br/>item1<br/>item2<br/>[/list]</span><br/>");      
       print("<div id='line'>&nbsp;</div>\n");
       print("<span class='typed'>[c], [c/]</span> &raquo; &para; capoverso<br/>");
       print("<div id='line'>&nbsp;</div>\n");

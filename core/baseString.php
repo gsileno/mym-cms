@@ -97,15 +97,22 @@
   // ----------------------------------------
   
   function cryptate($string) {
-     if (is_array($string))
-       return base64_encode(addslashes(json_encode($string)));
+     if (is_array($string)) {
+	   if (function_exists("json_encode")) // ONLY in PHP > 5.2.0
+         return base64_encode(addslashes(implode("#TNT-ACME#", $string)));
+       else 
+         return base64_encode(addslashes(json_encode($string)));
+     }               
      else 
        return base64_encode($string);
   }
        
   function decryptate($string) {
      $string = base64_decode($string);
-     $array = json_decode(stripslashes($string), true);  
+     if (function_exists("json_decode"))  // ONLY in PHP > 5.2.0
+       $array = json_decode(stripslashes($string), true);  
+     else 
+       $array = explode("#TNT-ACME#", stripslashes($string));
      
      if (is_array($array)) 
        return $array;

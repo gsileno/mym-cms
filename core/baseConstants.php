@@ -44,7 +44,7 @@ if (!function_exists('property_exists')) {
     $rev = $matches[1];
   }
 
-  define("MYM_VERSION", "0.6.".$rev);          // MyM Version
+  define("MYM_VERSION", "0.6.2.".$rev);          // MyM Version
 
   // Possible actions
   enum('_READ', '_WRITE', '_DELETE', '_READOWN', '_WRITEOWN', '_DELETEOWN'); 

@@ -696,12 +696,14 @@ class MyMadmin {
         print("</ul>\n"); 
 
         print("<div class='clear'>&nbsp;</div>");
-        print("<h2>Plugins</h2>");
-        print("<ul class='structures'>\n");     
-        for ($i = 0; $i < count($plugins); $i++) {
-          print("  <li><strong><a href='index.php?plugin=".$plugins[$i]."'>".$plugins[$i]."</a></strong></li>\n");
+        if (count($plugins) > 0) {
+		  print("<h2>Plugins</h2>");
+          print("<ul class='structures'>\n");     
+          for ($i = 0; $i < count($plugins); $i++) {
+            print("  <li><strong><a href='index.php?plugin=".$plugins[$i]."'>".$plugins[$i]."</a></strong></li>\n");
+          }
+          print("</ul>\n");         
         }
-        print("</ul>\n");         
         break;
         
       default:  

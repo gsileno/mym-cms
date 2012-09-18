@@ -141,7 +141,9 @@ li { list-style-type: none; margin: 0px; padding: 0px;}
 #table3col table { width:100%; border: 0px; margin:0px 0px 10px 0px; padding: 0px;} 
 #table3col td.right img { max-width: 400px; margin-bottom: 5px;}
 
-#table3col td.right ul li, #table2col td.right ul li { list-style-type: disc; margin-left: 20px; margin-bottom: 5px; line-height: 12px; }
+#table3col td.right ul { margin-left: 20px; margin-bottom: 0px; }
+
+#table3col td.right ul li, #table2col td.right ul li { list-style-type: disc; margin-left: 0px; margin-bottom: 5px; line-height: 12px; }
 
 #cpt table {  width: 600px; border: 0px; margin:0px 0px 10px 0px; padding: 0px;} 
 #cpt td.left { border: 5px solid black; padding: 0px; width: 400px; text-align: right }

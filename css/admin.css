@@ -13,9 +13,9 @@ p { margin-bottom: 10px; }
 #credits { text-align:left ; margin-top:0px; color: #ccc; width:100%; background: #303f50; border-top: 1px solid black; }
 #credits p { font-family: Verdana, Arial, Helvetica, Sans-serif; font-size: 11px; padding: 5px 0px; width:940px; margin: 0px auto 0px auto; }
 
-#header { width:100%;overflow:hidden; background: #505f70; /* background: #BBD9EE; */ border-bottom: 1px solid black; }
-#header h1, div#menu {width:940px; margin:0 auto;text-align:left }
-#header h1 { padding: 30px 0 20px;color: #fff }
+#header { height: 50px; width:100%;overflow:hidden; background: #505f70; /* background: #BBD9EE; */ border-bottom: 1px solid black; }
+#header h1, div#menu { font-size: 20px; width:940px; margin:0 auto;text-align:left }
+#header h1 { padding: 20px 0 0px;color: #fff }
 #header h1 a { color: #fff }
 #header h1 a:hover { color: #eee; border-bottom: 0px; }
 

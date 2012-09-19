@@ -41,6 +41,15 @@ function islogged($minpriv = 0) {
   }
   return false;
 } 
+
+function redirect($url="index.php") { ?>
+  <script type="text/JavaScript">
+  <!--
+  setTimeout("location.href = '<?php echo $url ?>';",1500);
+  -->
+  </script>
+<?php
+}
   
 //////////// MyMadmin class
 
@@ -309,7 +318,8 @@ class MyMadmin {
             $this->id = UNDEFINED;
             $this->elem = new $this->o();          
             $this->a = 'read';
-            $this->run();
+            print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
+            redirect();
           }
           else {
             print "<p>Sorry, this record could not be saved correctly.</p>\n";
@@ -333,7 +343,8 @@ class MyMadmin {
           if ($result) {
             print "<p>This record has been updated!!</p>\n";
             $this->a = 'read';
-            $this->run();
+            print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
+            redirect();
           }
           else {
             print "<p>Sorry, this record could not be saved correctly.</p>\n";
@@ -348,6 +359,8 @@ class MyMadmin {
         print("<h2>Delete</h2>\n");
         if ($this->elem->MyMdelete()) {
           print "<p>This record has been deleted.</p>\n";
+          print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
+          redirect();          
         }      
         else {
           print "<p>Sorry, this record could not be deleted.</p>\n";
@@ -373,7 +386,8 @@ class MyMadmin {
         require_once(MYM_PATH."/core/admin.php");
         require_once(MYM_PATH."/core/admin.php");
         if (MyMcheckvalidate("user", $this->email, $this->valcode)) { 
-          print "<p>".makelink("&laquo; Home")."</p>\n";
+          print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
+          redirect();
         } else {
           print("<p>Please enter again your email and validation code:</p>\n");
           MyMvalidate("user");
@@ -400,7 +414,8 @@ class MyMadmin {
             print("<p>Login successful.</p>\n"); 
           else 
             print("<p>Sorry, not successful login.</p>\n"); 
-          print "<p>".makelink("&laquo; Home")."</p>\n";
+          print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
+          redirect();
         } else {
           print("<p>Please enter again your login:</p>\n");
           MyMlogin("user");
@@ -415,10 +430,12 @@ class MyMadmin {
         require_once(MYM_PATH."/core/admin.php");
         MyMlogout("user");
         print "<p>Your logout has been successful.</p>\n";
-        print "<p>".makelink("&laquo; Home")."</p>\n";
+        print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
+        redirect();
         break;  
-  
-        case 'reset':
+        
+      // 
+      case 'reset':
         if (issession(MYM_USER_DB.'_priv')) {
           if (session(MYM_USER_DB.'_priv') >= MYM_ADMIN_PRIV) {
             print("<h2>Reset all images...</h2>\n");
@@ -590,7 +607,7 @@ class MyMadmin {
             }
   
             print("</p>\n");
-            print "<p>".makelink("&laquo; Home")."</p>\n";
+            print "<p>Redirecting to ".makelink("&raquo; Control Panel")."...</p>\n";
             break;
           }
         }           
@@ -679,7 +696,7 @@ class MyMadmin {
 		  print("<hr/>");
 		}      
 		      
-        print("<h2>Structures allowed</h2>");
+        print("<h2>Brick walls</h2>");
         $structures = $this->structures;    
         $plugins = $this->plugins;
         

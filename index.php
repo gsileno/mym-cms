@@ -45,7 +45,7 @@ function islogged($minpriv = 0) {
 function redirect($url="index.php") { ?>
   <script type="text/JavaScript">
   <!--
-  setTimeout("location.href = '<?php echo $url ?>';",1500);
+  setTimeout("location.href = '<?php echo $url ?>';", 700);
   -->
   </script>
 <?php
@@ -696,7 +696,7 @@ class MyMadmin {
 		  print("<hr/>");
 		}      
 		      
-        print("<h2>Brick walls</h2>");
+        print("<h2>Structures</h2>");
         $structures = $this->structures;    
         $plugins = $this->plugins;
         

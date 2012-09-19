@@ -326,7 +326,7 @@ class MyMelement
 
    // Choose the right ID (most recent and in the right language, and return it
    // if others is true this functions returns (right ID, other same language IDs, other languages most recent ID)  
-   function chooseId($unid = UNDEFINED, $unidfield = UNDEFINED, $lngfield = UNDEFINED, $datefield = UNDEFINED) {   
+   function chooseId($unid = UNDEFINED, $unidfield = UNDEFINED, $lngfield = UNDEFINED, $datefield = UNDEFINED, $filter = "") {   
      trace(MYM_ELEMENT_TRACE + 2, $this->db." > chooseId (unid = $unid, unidfield = $unidfield, lngfield = $lngfield, datefield = $datefield)");
 
      global $mysql;
@@ -334,25 +334,33 @@ class MyMelement
      
        // look for the last modified element
        if ($lngfield == UNDEFINED) {
-         $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid' ORDER BY $datefield DESC LIMIT 1;";
+         $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid'";
+         if ($filter != "") $query .= " AND $filter";
+         $query .= " ORDER BY $datefield DESC LIMIT 1;";
          $id = OneQuery('chooseId', $query);       
          trace(MYM_ELEMENT_TRACE + 2, " > chooseId > Last modified ($query): ". $id);
        } 
        else {
          // look for the last modified element in the language given by the session
-         $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid' AND $lngfield = '".session('lng')."' ORDER BY $datefield DESC LIMIT 1;";       
+         $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid'";
+         if ($filter != "") $query .= " AND $filter";
+         $query .= " AND $lngfield = '".session('lng')."' ORDER BY $datefield DESC LIMIT 1;";       
          $id = OneQuery('chooseId', $query);       
          trace_r(MYM_ELEMENT_TRACE + 2, " > chooseId > Last modified id by session lng ($query): ", $id);
          
          if ($id == NULL) {
            // look for the last modified element in the default language         
-           $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid' AND $lngfield = '".MYM_DEFAULT_LANGUAGE."' ORDER BY $datefield DESC LIMIT 1;";
+           $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid'";
+           if ($filter != "") $query .= " AND $filter"; 
+           $query .= " AND $lngfield = '".MYM_DEFAULT_LANGUAGE."' ORDER BY $datefield DESC LIMIT 1;";
            $id = OneQuery('chooseId', $query);       
            trace_r(MYM_ELEMENT_TRACE + 2, " > chooseId > Last modified by default lng ($query): ", $id);
         
            if ($id == NULL) {
              // look for the last modified element in the first available language       
-             $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid' ORDER BY $datefield DESC LIMIT 1;";
+             $query = "SELECT id FROM ".MYM_MYSQL_PREFIX.$this->db."s WHERE $unidfield = '$unid' ";
+             if ($filter != "") $query .= " AND $filter";              
+             $query .= " ORDER BY $datefield DESC LIMIT 1;";
              $id = OneQuery('chooseId', $query);       
              trace_r(MYM_ELEMENT_TRACE + 2, " > chooseId > Last modified ($query): ", $id);
            } 
@@ -368,15 +376,18 @@ class MyMelement
        // look for the last modified element
        if ($lngfield == UNDEFINED) {
 
-         $query = "\$".$unidfield." == ".$unid;
+         $query = "(\$".$unidfield." == ".$unid.")";
+         if ($filter != "") $query .= " && (".$filter.")";
          $listid = $dbtable->select($query);
          $result = $dbtable->order($datefield, false, $listid);
+         if (!$result) return false;
          $id = $result[0];
          trace(MYM_ELEMENT_TRACE + 2, " > chooseId > Last modified ($query): ". $id);
        } 
        else {
          // look for the last modified element in the language given by the session       
          $query = "(\$".$unidfield." == ".$unid.") && (\$".$lngfield." == '".session('lng')."')";
+         if ($filter != "") $query .= " && (".$filter.")";
          $listid = $dbtable->select($query);
          $result = $dbtable->order($datefield, false, $listid);
          if ($result) {
@@ -387,6 +398,7 @@ class MyMelement
          if (!$result) {
            // look for the last modified element in the default language         
            $query = "(\$".$unidfield." == ".$unid.") && (\$".$lngfield." == '".MYM_DEFAULT_LANGUAGE."')";
+           if ($filter != "") $query .= " && (".$filter.")";
            $listid = $dbtable->select($query);
            $result = $dbtable->order($datefield, false, $listid);
            if ($result) {
@@ -397,9 +409,12 @@ class MyMelement
            if (!$result) {
              // look for the last modified element in the first available language
              $query = "\$".$unidfield." == ".$unid;
+             if ($filter != "") $query .= " && (".$filter.")";             
              $listid = $dbtable->select($query);
              $result = $dbtable->order($datefield, false, $listid);
-             if ($result) {
+             if (!$result) {
+			   return false;
+			 } else {
                $id = $result[0];
                trace_r(MYM_ELEMENT_TRACE + 2, " > chooseId > Last modified by default lng ($query): ", $id);
              }
@@ -461,7 +476,7 @@ class MyMelement
    }
    
    // Read in a intelligent way: the last upate, in the choosed language (if defined)
-   function MyMadvread($id = UNDEFINED, $what = "*") {
+   function MyMadvread($id = UNDEFINED, $what = "*", $filter = UNDEFINED) {
      trace(MYM_ELEMENT_TRACE + 3, $this->db." > MyMadvread (id = $id, what = $what)");
 
      list($unidfield, $lngfield, $datefield, $checkpriv) = $this->advanced();      
@@ -474,7 +489,10 @@ class MyMelement
      if ($unid == UNDEFINED || $checkpriv == _NONE)
         return false;
      
-      $id = $this->chooseId($unid, $unidfield, $lngfield, $datefield);
+     $id = $this->chooseId($unid, $unidfield, $lngfield, $datefield, $filter);    
+     
+     if (!$id) return false;
+          
      trace(MYM_ELEMENT_TRACE + 3, $this->db." > MyMadvread > id : ". $id);
      return $this->MyMread($id, $what);
    }                                                                    
@@ -593,7 +611,7 @@ class MyMelement
  
        // For every UNID choose the right ID (Last modified, right or possible Language)
        for ($i = 0; $i < $n; $i ++) 
-         $listid[] = $this->chooseId($list[$i][$unidfield], $unidfield, $lngfield, $datefield);
+         $listid[] = $this->chooseId($list[$i][$unidfield], $unidfield, $lngfield, $datefield, $where);
 
      }
      else {
@@ -653,7 +671,7 @@ class MyMelement
        // For every UNID choose the right ID (Last modified, right or possible Language)
        $listid = NULL;
        for ($i = $bottom; $i < $bottom + $n; $i ++) 
-         $listid[] = $this->chooseId($listunid[$i], $unidfield, $lngfield, $datefield);
+         $listid[] = $this->chooseId($listunid[$i], $unidfield, $lngfield, $datefield, $where);
 
     }
      

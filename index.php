@@ -19,6 +19,9 @@
    This file runs the control panel of MyM.
 */
 
+error_reporting(E_ALL);
+ini_set("display_error", "1");
+
 define('MYM_ADMIN_TRACE', 0);
 define('ELEM_PER_PAGE', 5);
 
@@ -765,6 +768,7 @@ function loginMenu($o, $a, $structures) {
       print("<img src='".MYM_RELATIVE_PATH."/img/ext_fr.png' alt='Fran�ais' />");break;
   }
   print("  </li>\n");    
+
   
   // if there is user management
   if (defined("MYM_USER_DB")) {
@@ -905,10 +909,11 @@ $structures = $mymadmin->structures;
 </div>
 
 <div id="header">
-  <h1><a href="index.php">MyM Control Panel</a></h1>
+  <h1><a href="index.php">MyM Control Panel</a> </h1>
+ 
 </div>
 <div id='credits'>
-<p>powered by - <strong>MyM</strong> - revision: <?php print(MYM_VERSION); ?></p>
+<p>Site powered by - <strong>MyM</strong> - revision: <?php print(MYM_VERSION); ?>  | <?php print("  <a href='".ROOT_URI."' target='_blank'>Homepage</a>\n"); ?> </p>
 </div>
 
 <div id='content'>

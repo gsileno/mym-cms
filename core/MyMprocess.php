@@ -51,6 +51,8 @@ function br2newline($string, $newline = "\n") {
 
 function list2HTML($text) {
 
+  trace(MYM_PROCESS_TRACE + 1, " list2HTML > input string : $text");
+
   // list of items
 
   // find all the lists of items
@@ -67,7 +69,7 @@ function list2HTML($text) {
     
     // separate items with newlines
     ### TO DO: add end of string, as terminal character for an item
-    $nitems = preg_match_all('/(.+?)[(\r?\n)]/sm', $listcode, $itemmatches);
+    $nitems = preg_match_all('/(.+?)[\r?\n]/sm', $listcode, $itemmatches);
 
     $code = "";
     
@@ -89,6 +91,8 @@ function list2HTML($text) {
     
   }
   
+  trace(MYM_PROCESS_TRACE + 1, " list2HTML > output string : $text");
+    
   return $text;
 }
 
@@ -332,6 +336,8 @@ function bbcode2HTML($text) {
                  '/\[h\](.+?)\[\/h\]/i',
                  '/\[h1\](.+?)\[\/h1\]/i',                    
                  '/\[h2\](.+?)\[\/h2\]/i',
+                 '/\[h3\](.+?)\[\/h3\]/i',
+                 '/\[h4\](.+?)\[\/h4\]/i',                                  
                  '/\[b\](.+?)\[\/b\]/i',
                  '/\[i\](.+?)\[\/i\]/i',
                  //'/\[u\](.+?)\[\/u\]/i',
@@ -365,6 +371,8 @@ function bbcode2HTML($text) {
                 '<span class="header">$1</span>',         // for astragali site
                 '<h1>$1</h1>',
                 '<h2>$1</h2>',
+                '<h3>$1</h3>',
+                '<h4>$1</h4>',
                 '<strong>$1</strong>',
                 '<em>$1</em>',
                 //'<u>$1</u>',
@@ -405,6 +413,8 @@ function MyMcode2txt($text) {
                  '/\[h\](.+?)\[\/h\]/i',
                  '/\[h1\](.+?)\[\/h1\]/i',                    
                  '/\[h2\](.+?)\[\/h2\]/i',
+                 '/\[h3\](.+?)\[\/h3\]/i',                    
+                 '/\[h4\](.+?)\[\/h4\]/i',
                  '/\[b\](.+?)\[\/b\]/i',
                  '/\[i\](.+?)\[\/i\]/i',
                  //'/\[u\](.+?)\[\/u\]/i',
@@ -442,6 +452,8 @@ function MyMcode2txt($text) {
                 '*$1*',
                 '***** $1 *****',                
                 '*** $1 ***',                
+                '** $1 **',                
+                '* $1 *',                
                 '*$1*',
                 '$1',
                 //'<u>$1</u>',

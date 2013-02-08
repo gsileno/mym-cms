@@ -138,6 +138,11 @@ li { list-style-type: none; margin: 0px; padding: 0px;}
 #table3col td.ultraleft { font-family: Verdana, Arial, Helvetica, Sans-serif; padding: 5px; width: 40px; text-align: right; vertical-align: top;}
 #table3col td.left { background-color:#fefefe; padding: 5px; width: 120px; text-align: right; vertical-align: top;}
 #table3col td.right { background-color:#f3f3fe; font: normal 10px Verdana, Arial, Sans-serif; vertical-align: top; padding: 5px 10px; text-align: left;}
+#table3col td.right h1 { margin: 0px; padding: 0px; font-size: 180%;}
+#table3col td.right h2 { margin: 0px; padding: 0px; font-size: 150%;}
+#table3col td.right h3 { margin: 0px; padding: 0px; font-size: 130%;}
+#table3col td.right h4 { margin: 0px; padding: 0px; font-size: 110%;}
+
 #table3col td.rightbutton { font: normal 10px Verdana, Arial, Sans-serif; vertical-align: top; padding: 10px 0px 0px 0px; text-align: left;}
 #table3col tr { border: 0px; margin:0px; padding: 0px;} 
 #table3col table { width:100%; border: 0px; margin:0px 0px 10px 0px; padding: 0px;} 

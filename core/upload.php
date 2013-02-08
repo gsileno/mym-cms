@@ -7,6 +7,7 @@
 // -----------------------------------------------------------------   
 // (c) Giovanni Sileno 2006, 2010 - giovanni.sileno@mexpro.it
 
+define('DATE_UPLOADNAME', true);
 define('OVERWRITE', false);
 define('MYM_UPLOAD_TRACE', 0);
 
@@ -111,16 +112,21 @@ function upload($filedata, $path = MYM_UPLOAD_REALPATH, $limit_size = true, $siz
   $ext = ".".end($filenameparts); 
   $justname = strstr($filename, $ext, true);
   
+  if (DATE_UPLOADNAME)
+    $justname = $justname.date("Ymd");
+  
+  $filename = $justname.$ext;
+  
   if (is_file($path."/".$filename) && !OVERWRITE) {
     print("<p><span class='warning'><strong>Warning</strong> A file with the same name exists. This new file will renamed.</span></p>");
-    for($i = 0; is_file($path."/".$justname.$i.$ext); $i++); 
-    $filename = $justname.$i.$ext;
+    for($i = 0; is_file($path."/".$justname."_".$i.$ext); $i++); 
+    $filename = $justname."_".$i.$ext;
   } 
     
   if (($limit_ext == true) && (!in_array($ext, $exts))) {
     trace(MYM_UPLOAD_TRACE + 2, " upload > ext: ". $ext);
     $endresult = "The file $filename has not the good extension ($texts)..";
-  } else if (($limit_size == "yes") && ($size_limit < $filesize)) {
+  } else if (($limit_size == true) && ($size_limit < $filesize)) {
     $endresult = "The file $filename is too large.";
   } else if (!copy($filetmp, $path."/".$filename)) { // move_uploaded_file($filetmp, $path."/".$filename)) // copy($filetmp, $path."/".$filename)
     $endresult = "An error occurred during the uploading ($filetmp ->".$path."/".$filename.").";

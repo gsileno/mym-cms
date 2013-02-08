@@ -482,7 +482,7 @@ class MyMtype {
         $output = "<td class='left'>".$this->label."</td>";
         if (is_file(MYM_UPLOAD_REALPATH."/$value")) {
           $output .= "<td class='right'>".$value;
-          $output .= "( <a href='$file'>Download</a> )";
+          $output .= " (<a href='$file'>Download</a>)";
           $output .= "</td>\n";
         } else 
           $output .= "<td class='error'><strong>Error</strong> Not valid filename ($value).</td>";

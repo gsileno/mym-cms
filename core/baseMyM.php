@@ -190,14 +190,16 @@
     
   }
 
-  function MyMboot($path = NULL, $checklanguage = true) {
+  function MyMboot($path = NULL) {
     if ($path == NULL)
       show_error('Please define the relative path from MyM to your app directory.');
   
     MyMsetup($path);
     MyMsetupusersession();    
     
-    if ($checklanguage) MyMsetuplng();
+    if (defined('MYM_LANGUAGES')) 
+      MyMsetuplng();
+       
     MyMcorelng();
 
     if (defined('MYM_LANGUAGES')) 

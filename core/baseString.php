@@ -21,7 +21,7 @@
     $pattern = array("/^(<br[\/]?>)+\s*/", "/(<br[\/]?>)+\$/", "/((<br[\/]?>)+\s*){2,}/");
     $replace = array("", "", "</p><p>");
     $string = preg_replace($pattern, $replace, $string);
-    $string = "<p>".$string."</p>";
+    $string = "<p>".$string."</p>\n";
     return $string;
   }
 

@@ -2,7 +2,9 @@
 MyM - avant CMS 
 ==================
 
-Author: <Giovanni Sileno> giovanni@mexpro.it
+MyM is thought for light-weighted, very customized applications that need an internet base point. It follows ideas similar to other frameworks, but it is smaller,  and does not need necessarly MySQL. Just copy your site/application directory on your server!
+
+Author: Giovanni Sileno <giovanni@mexpro.it>
 
 This program is free software published under the
 terms of the GNU Lesser General Public License.
@@ -47,7 +49,7 @@ Features:
 * bbcode-like text content
 * upload management
 * resize image functions
-* chaching functions  
+* caching functions  
 
 * light-weighted javascript error check for forms
 
@@ -67,14 +69,3 @@ Integrated dependencies (not covered by this licence):
 * language detection script (lgpl)
   http://techpatterns.com/downloads/php_language_detection.php
   
--------
-Notes:
--------
-
-MyM is an "avant" CMS, because I consider it "before" a CMS. 
-It follows ideas similar to other frameworks, but it is littler, 
-and does not need necessarly MySQL. Just copy your site/application 
-directory on your server!
-
-it is thought for light-weighted, very customized applications 
-that need an internet base point.

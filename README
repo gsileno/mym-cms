@@ -2,7 +2,10 @@
 MyM - avant CMS 
 ==================
 
-MyM is thought for light-weighted, very customized applications that need an internet base point. It follows ideas similar to other frameworks, but it is smaller,  and does not need necessarly MySQL. Just copy your site/application directory on your server!
+MyM is thought for light-weighted, very customized applications 
+that need an internet base point. It follows ideas similar to 
+other frameworks, but it is smaller, and does NOT need MySQL. 
+Just copy your site/application directory on your server!
 
 Author: Giovanni Sileno <giovanni@mexpro.it>
 

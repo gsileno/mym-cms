@@ -133,7 +133,7 @@
     global $connection;
     
     if (defined('MYM_MYSQL')) {
-      mysql_close($connection);
+      mysqli_close($connection);
     }
   }
   

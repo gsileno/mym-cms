@@ -46,7 +46,7 @@ class Txtdb {
  * @param	string	directory permission (linux/unix chmod in a octal mode) 
  * @return	void	
  */   
-  function Txtdb($params = null, $dbbasepath = null, $tableext = TABLE_EXTENSION, $fieldseparator = FIELD_SEPARATOR, $dbchmod = DB_CHMOD) {
+  public function __construct($params = null, $dbbasepath = null, $tableext = TABLE_EXTENSION, $fieldseparator = FIELD_SEPARATOR, $dbchmod = DB_CHMOD) {
      
     // first parameter can be an array with all parameters
     if (is_array($params)) {
@@ -276,7 +276,7 @@ class Txttable {
  * @param	bool	true if elements will be deleted with all the row, false if at their place there will be a "\n"  
  * @return	void	
  */
-  function Txttable($params = null, $path = null, $containsfields = true, $fields = array(), $separator = FIELD_SEPARATOR, $concrete_delete = true, $tableext = TABLE_EXTENSION) {
+  public function __construct($params = null, $path = null, $containsfields = true, $fields = array(), $separator = FIELD_SEPARATOR, $concrete_delete = true, $tableext = TABLE_EXTENSION) {
     
     // first parameter can be an array with all parameters
     if (is_array($params)) {
@@ -636,7 +636,7 @@ class Txttable {
           // define variables called as "col"+numberofcol 
           // with the values in the table        
           if ($raw) {
-	    $var = "col".($j+1);
+	        $var = "col".($j+1);
             $$var = $array[$j];
           }
           // define variables called as the fields 
@@ -648,7 +648,7 @@ class Txttable {
         }
         
         $id = $i + 1; // changing from index to id        
-         
+        
         // if the condition is satisfied than add it to the list
         eval("\$condition = ($where);");
         if ($condition) {

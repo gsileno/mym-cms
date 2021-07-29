@@ -25,26 +25,26 @@
      trace(1, " > Connecting to DB...");
    
      if (MYM_MYSQL_PASSWORD == "")
-       $connection = mysql_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER) or tracedie("> ERROR: connection to <em>".MYM_MYSQL_SERVER."</em> not successful.\n");
+       $connection = mysqli_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER) or tracedie("> ERROR: connection to <em>".MYM_MYSQL_SERVER."</em> not successful.\n");
      else 
-       $connection = mysql_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER, MYM_MYSQL_PASSWORD) or tracedie($caller."> ERROR: connection to <em>".MYM_MYSQL_SERVER."</em> successful.\n");
+       $connection = mysqli_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER, MYM_MYSQL_PASSWORD) or tracedie("> ERROR: connection to <em>".MYM_MYSQL_SERVER."</em> not successful.\n");
    
-     mysql_select_db(MYM_MYSQL_DB) or tracedie(" > ERROR: connection to <em>".MYM_MYSQL_DB."</em> not successful.<br />\n". mysql_errno() . ": " . mysql_error(). "\n");
+     mysqli_select_db(MYM_MYSQL_DB) or tracedie(" > ERROR: connection to <em>".MYM_MYSQL_DB."</em> not successful.<br />\n". mysqli_errno() . ": " . mysqli_error(). "\n");
      
      return $connection;
    }
    
    function testmysqlconnect() {
      if (MYM_MYSQL_PASSWORD == "") {
-       if (!mysql_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER))
+       if (!mysqli_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER))
          return false;
      }      
      else {
-       if (!mysql_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER, MYM_MYSQL_PASSWORD))
+       if (!mysqli_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER, MYM_MYSQL_PASSWORD))
          return false;
      }     
      
-     if (!mysql_select_db(MYM_MYSQL_DB))
+     if (!mysqli_select_db(MYM_MYSQL_DB))
        return false;
      return true;
    }
@@ -59,15 +59,15 @@
      trace(1, "insertQuery > $query");
    
      /* insertion */
-     $result = mysql_query($query); $nqueries++;  
+     $result = mysqli_query($query); $nqueries++;  
      
-     trace(1, mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
-     if (mysql_errno() > 0) tracedie($caller." > ERROR: Insertion query '$query' echu�e. <br/>". mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
+     trace(1, mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: Insertion query '$query' echu�e. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
-     $id = mysql_insert_id();
+     $id = mysqli_insert_id();
    
      /* closing connection */
-     // mysql_close($connection); 
+     // mysqli_close($connection); 
        
      return $id;
    }
@@ -83,13 +83,13 @@
      trace(1, "updateQuery > $query");
    
      /* insertion */
-     $result = mysql_query($query); $nqueries++;  
+     $result = mysqli_query($query); $nqueries++;  
        
-     trace(1, mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
-     if (mysql_errno() > 0) tracedie($caller." > ERROR: Update query '$query' echu�e. <br/>". mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
+     trace(1, mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: Update query '$query' echu�e. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
    
      /* closing connection */
-     // mysql_close($connection); 
+     // mysqli_close($connection); 
    
      return true;
    }
@@ -105,13 +105,13 @@
      trace(1, "deleteQuery > $query");
    
      /* insertion */
-     $result = mysql_query($query); $nqueries++;  
+     $result = mysqli_query($query); $nqueries++;  
        
-     trace(1, mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
-     if (mysql_errno() > 0) tracedie($caller." > ERROR: Delete query '$query' echu�e. <br/>". mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
+     trace(1, mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: Delete query '$query' echu�e. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
    
      /* closing connection */
-     // mysql_close($connection); 
+     // mysqli_close($connection); 
    
      return true;
    }
@@ -122,13 +122,13 @@
      
      trace(1, "$caller > Query > $query");
      
-     $result = mysql_query($query); $nqueries++;    
-     if (mysql_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
+     $result = mysqli_query($query); $nqueries++;    
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
-     $row = mysql_fetch_array($result, MYSQL_ASSOC);
+     $row = mysqli_fetch_array($result, MYSQL_ASSOC);
      
      trace_r(1, "$caller > Result Query > ", $row);
-     mysql_free_result($result);
+     mysqli_free_result($result);
    
      return $row;
    }
@@ -139,13 +139,13 @@
      
      trace(1, "$caller > Query > $query");
      
-     $result = mysql_query($query); $nqueries++;    
-     if (mysql_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
+     $result = mysqli_query($query); $nqueries++;    
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
-     $row = mysql_fetch_row($result);
+     $row = mysqli_fetch_row($result);
      
      trace_r(1, "$caller > Result Query > ", $row);
-     mysql_free_result($result);
+     mysqli_free_result($result);
    
      return $row[0];
    }
@@ -157,18 +157,18 @@
    
      trace(1, "$caller > Query > $query");
    
-     $result = mysql_query($query); $nqueries++;   
-     if (mysql_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysql_errno() . ": " . mysql_error(). "\n" . "<br />");
+     $result = mysqli_query($query); $nqueries++;   
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
      $list = null;  
      $n = 0;
-     while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
+     while ($row = mysqli_fetch_array($result, MYSQL_ASSOC)) {
        $list[] = $row;
        $n = $n + 1;
      }  
    
      trace_r(1, "$caller > Result Query > ", $list);
-     mysql_free_result($result);
+     mysqli_free_result($result);
    
      return array($list, $n);
    }

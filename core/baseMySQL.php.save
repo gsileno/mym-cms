@@ -29,7 +29,7 @@
      else 
        $connection = mysqli_connect(MYM_MYSQL_SERVER, MYM_MYSQL_USER, MYM_MYSQL_PASSWORD) or tracedie("> ERROR: connection to <em>".MYM_MYSQL_SERVER."</em> not successful.\n");
    
-     mysqli_select_db($connection, MYM_MYSQL_DB) or tracedie(" > ERROR: connection to <em>".MYM_MYSQL_DB."</em> not successful.<br />\n". mysqli_errno($connection) . ": " . mysqli_error($connection). "\n");
+     mysqli_select_db(MYM_MYSQL_DB) or tracedie(" > ERROR: connection to <em>".MYM_MYSQL_DB."</em> not successful.<br />\n". mysqli_errno() . ": " . mysqli_error(). "\n");
      
      return $connection;
    }
@@ -52,21 +52,19 @@
    // Query for insertion
    // $caller is the calling function, $insertion is the insertion query
    function insertQuery($caller, $query) {
-     global $connection, $nqueries;
-
-     if ($connection == null)
+     global $nqueries;
      /* connection and selection of the database */
-       $connection = connect($caller);
+     // $connection = connect($caller);
    
      trace(1, "insertQuery > $query");
    
      /* insertion */
-     $result = mysqli_query($connection, $query); $nqueries++;  
+     $result = mysqli_query($query); $nqueries++;  
      
-     trace(1, mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
-     if (mysqli_errno($connection) > 0) tracedie($caller." > ERROR: Insertion query '$query' echu�e. <br/>". mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
+     trace(1, mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: Insertion query '$query' echu�e. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
-     $id = mysqli_insert_id($connection);
+     $id = mysqli_insert_id();
    
      /* closing connection */
      // mysqli_close($connection); 
@@ -77,18 +75,18 @@
    // Query for update
    // $caller is the calling function, $update is the insertion query
    function updateQuery($caller, $query) {
-     global $connection, $nqueries;
+     global $nqueries;
      
      /* connection and selection of the database */
      // $connection = connect($caller);
-
+   
      trace(1, "updateQuery > $query");
    
      /* insertion */
-     $result = mysqli_query($connection, $query); $nqueries++;  
+     $result = mysqli_query($query); $nqueries++;  
        
-     trace(1, mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
-     if (mysqli_errno($connection) > 0) tracedie($caller." > ERROR: Update query '$query' echu�e. <br/>". mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
+     trace(1, mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: Update query '$query' echu�e. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
    
      /* closing connection */
      // mysqli_close($connection); 
@@ -120,12 +118,12 @@
    
    // Generic Univocal Query 
    function Query($caller, $query) {
-     global $connection, $nqueries;
+     global $nqueries;
      
      trace(1, "$caller > Query > $query");
      
-     $result = mysqli_query($connection, $query); $nqueries++;    
-     if (mysqli_errno($connection) > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
+     $result = mysqli_query($query); $nqueries++;    
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
      $row = mysqli_fetch_array($result, MYSQL_ASSOC);
      
@@ -137,12 +135,12 @@
    
    // Generic Univocal Query 
    function OneQuery($caller, $query) {
-     global $connection, $nqueries;
+     global $nqueries;
      
      trace(1, "$caller > Query > $query");
      
-     $result = mysqli_query($connection, $query); $nqueries++;    
-     if (mysqli_errno($connection) > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
+     $result = mysqli_query($query); $nqueries++;    
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
      $row = mysqli_fetch_row($result);
      
@@ -155,12 +153,12 @@
    // Generic List Query
    // Return an array and the number of elements.
    function ListQuery($caller, $query) {
-     global $connection, $nqueries;
+     global $nqueries;
    
      trace(1, "$caller > Query > $query");
    
-     $result = mysqli_query($connection, $query); $nqueries++;   
-     if (mysqli_errno($connection) > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno($connection) . ": " . mysqli_error($connection). "\n" . "<br />");
+     $result = mysqli_query($query); $nqueries++;   
+     if (mysqli_errno() > 0) tracedie($caller." > ERROR: the query '$query' has failed. <br/>". mysqli_errno() . ": " . mysqli_error(). "\n" . "<br />");
      
      $list = null;  
      $n = 0;
